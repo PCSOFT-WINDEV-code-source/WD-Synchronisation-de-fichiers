@@ -1,0 +1,472 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : COL_Synchronisation
+ major_version : 28
+ minor_version : 0
+ type : 7
+ description : ""
+ subtype : 0
+procedure_set :
+ identifier : 0x1829b9ad00492577
+ internal_properties : CAAAAAgAAABGLu41kG7fjQV3iS4F72qmnKaNh5694reolNKIW0iw
+ code_elements :
+  internal_properties : CAAAAAgAAAACL832/mmcr35ADTVGbNn9JK/0luf29h74Llt94Ay1LWMyGRldUwn8k7Mk6K+OoGBZ385W+BCLO1XJq91hG3VOcqh4cogdVxBIL8Niwioy8Q13KL7ZqUbZoEg=
+  type_code : 31
+  p_codes :
+   -
+     code : |1+
+      gtabFichierDestinationACopier est un tableau de chaînes
+      gtabFichierDestinationASupprimer est un tableau de chaine
+      
+      PRIVÉ
+      // Tableau des fichiers source et destination
+      gtabFichiersDestination 	est un tableau associatif de dateheures
+      gtabFichiersSource 			est un tableau associatif de dateheures
+      
+      // Noms des répertoires
+      gsNomRepertoireDestination 	est une chaine
+      gsNomRepertoireSource 		est une chaine
+      
+      // Gestion des sous-répertoires
+      gbAnalyserSousRepertoires	est un booléen
+      
+      // Gestion des exceptions
+      gtabRepertoiresException	est un tableau de chaines
+      gtabExtensionsException		est un tableau de chaines
+     type : 720896
+  procedures :
+   -
+     name : AnalyseRépertoires
+     procedure_id : 1741127356087193891
+     type_code : 15
+     code : |1-
+      // Résumé : Analyse la synchronisation
+      // Paramètres :
+      //	sNomRépertoireSource (chaîne ANSI) : Chemin du répertoire source
+      //	sNomRépertoireDestination (chaîne ANSI) : Chemin du répertoire destination
+      //	bAnalyserSousRepertoire (booléen) : Vrai pour analyser les sous-répertoires, Faux sinon
+      //	bEcraserFichiersPlusRécents (booléen) : Vrai pour écraser les fichiers différents même s'ils sont plus récents, Faux sinon
+      // Valeur de retour :
+      // 	booléen : // 	Aucune
+      //
+      PROCEDURE AnalyseRépertoires(sNomRépertoireSource est une chaine, sNomRépertoireDestination est une chaine, bAnalyserSousRepertoire est un booléen, bEcraserFichiersPlusRécents est un booléen)
+      
+      // Variables locales
+      bModeSource est un booléen
+      
+      // Initialisation des tableaux
+      TableauSupprimeTout(gtabFichiersDestination)
+      TableauSupprimeTout(gtabFichiersSource)
+      TableauSupprimeTout(gtabFichierDestinationACopier)
+      TableauSupprimeTout(gtabFichierDestinationASupprimer)
+      
+      // Vérification des répertoires
+      SI _bVérifieRépertoires(sNomRépertoireSource,sNomRépertoireDestination) = Faux alors	
+      	RENVOYER Faux
+      FIN
+      
+      // Mémorisation des répertoires
+      gsNomRepertoireDestination = sNomRépertoireDestination
+      gsNomRepertoireSource = sNomRépertoireSource
+      gbAnalyserSousRepertoires = bAnalyserSousRepertoire
+      
+      // On crée un chrono pour mettre à jour l'interface
+      ChronoDébut(1)
+      
+      // Analyse du répertoire source
+      bModeSource = Vrai
+      fListeFichier(sNomRépertoireSource+["\"]+"*.*", _AnalyseRepertoire,&bModeSource)
+      
+      // Analyse du répertoire destination
+      bModeSource = Faux
+      fListeFichier(sNomRépertoireDestination+["\"]+"*.*", _AnalyseRepertoire,&bModeSource)
+      
+      // Réalisation de la comparaison
+      _DetecteSiCopie(bEcraserFichiersPlusRécents)
+      _DetecteSiSuppression()
+      
+      // On trie les fichiers
+      tableautrie(gtabFichierDestinationACopier,ttCroissant)
+      tableautrie(gtabFichierDestinationASupprimer,ttCroissant)
+      
+      // Arrêt du chrono
+      ChronoFin(1)
+      
+      // Par défaut, l'analyse se déroule correctement
+      RENVOYER Vrai
+     type : 458752
+   -
+     name : _AnalyseRepertoire
+     internal_properties : CAAAAAgAAADWIdKkspoGqThYl6mWlFseAfZm2q4B5eaCZOxxaXLSU/zRe4KpjDDxQjoWUP5YuQ6i0r7jPkgt45qmVaZ0Bsx56VJYNHhwjzbgiKIXH/TLuElGJhg4DfIRnzRvt3Jnn/7uNcZWnyDsFxveqZIbG3Zb5LI4iTcY24B7eAc70HB4pRU/ZyWWAQDdi+CicrfbTmo4YPvyLaY=
+     procedure_id : 1741129726909169417
+     type_code : 15
+     code : |1-
+      // Résumé : Analyse un répertoire
+      // Paramètres :
+      //	sCheminFichier (chaîne ANSI) : Répertoire analysé
+      //	sNomFichier (chaîne ANSI) : Nom du fichier analysé
+      //	nChange (entier) : flag de changement de répertoire
+      //	bPointeurModeSource (entier) : Pointeur sur le booléen indiquant si on analyse un répertoire source ou destination
+      // Valeur de retour :
+      // 	booléen : Vrai si l'analyse va se poursuivre, Faux sinon
+      //
+      PROCEDURE _AnalyseRepertoire(sCheminFichier est une chaine, sNomFichier est une chaine, nChange est un entier, bPointeurModeSource est un entier)
+      
+      // Variables locales
+      sExtension 			est une chaine
+      dDateHeureFichier	est un dateheure
+      bModeParcoursSource est un booléen
+      sCheminFichierRelatif	est une chaine
+      
+      // Récupération du mode de parcours de la source
+      Transfert(&bModeParcoursSource, bPointeurModeSource, 4)
+      
+      // si on change de répertoire
+      SI nChange = 1 ALORS
+      	Message("Parcours du répertoire [%sCheminFichier%]")
+      	
+      	//si l'utilisateur ne veut pas parcourir les sous-répertoire, on sort
+      	SI gbAnalyserSousRepertoires=Faux ALORS	
+      		RENVOYER Faux
+      	FIN
+      FIN
+      
+      // Calcul du chemin relatif
+      SI bModeParcoursSource = Vrai ALORS
+      	sCheminFichierRelatif = Remplace(sCheminFichier+sNomFichier, gsNomRepertoireSource, "")
+      SINON
+      	sCheminFichierRelatif = Remplace(sCheminFichier+sNomFichier, gsNomRepertoireDestination, "")	
+      FIN
+      
+      // si ce répertoire n'est pas une exception
+      SI _bRepertoireEstException(sCheminFichierRelatif)=Faux _et_ _bRepertoireEstException(sCheminFichier)=Faux ALORS
+      	// extension du fichier
+      	sExtension = fExtraitChemin(sCheminFichier+sNomFichier,fExtension)	
+      	
+      	// si ce fichier n'est pas une exception
+      	SI TableauCherche(gtabExtensionsException,tcDichotomique+tccSansCasse,sExtension) <=0 _et_ ...
+      				TableauCherche(gtabExtensionsException,tcDichotomique+tccSansCasse,"*"+sExtension) <=0 alors
+      		// date et heure du fichier
+      		dDateHeureFichier = fDate(sCheminFichier+sNomFichier)+fHeure(sCheminFichier+sNomFichier)
+      		
+      		// Ajout du fichier		
+      		SI bModeParcoursSource = vrai alors
+      			gtabFichiersSource[sCheminFichierRelatif]  = dDateHeureFichier
+      		SINON
+      			gtabFichiersDestination[sCheminFichierRelatif]  = dDateHeureFichier
+      		FIN
+      	FIN
+      FIN
+      
+      // On force une actualisation de l'affichage toutes les 2 secondes
+      SI ChronoValeur(1) >= 2000 alors
+      	ChronoFin(1)
+      	FenRepeint()
+      	ChronoDébut(1)
+      FIN
+      
+      // Par défaut, on poursuit le parcours
+      RENVOYER Vrai
+     type : 458752
+   -
+     name : _bRepertoireEstException
+     procedure_id : 1741130607377538400
+     type_code : 15
+     code : |1-
+      // Résumé : Test si un répertoire est une exception
+      // Paramètres :
+      //	sRepertoire (chaîne ANSI) : Nom du répertoire
+      // Valeur de retour :
+      // 	booléen : vrai si le répertoire est un répertoire exception, Faux sinon
+      //
+      Procédure _bRepertoireEstException(sRepertoire est une chaine)
+      
+      // Variables locales
+      sRepertoireException est une chaine
+      
+      // si c'est un répertoire exception
+      pour tout element sRepertoireException de gtabRepertoiresException
+      	SI sRepertoireException<>"" alors
+      		SI sRepertoireException~=Gauche(sRepertoire,Taille(sRepertoireException)) alors
+      			RENVOYER Vrai
+      		FIN
+      	Fin
+      FIN
+      
+      
+      
+      // Par défaut, le répertoire n'est pas une exception
+      renvoyer faux
+     type : 458752
+   -
+     name : _DetecteSiCopie
+     procedure_id : 1741135104208427527
+     type_code : 15
+     code : |1-
+      // Résumé : Détecte les copies nécessaires pour synchroniser les répertoires
+      // Paramètres :
+      //	bEcraserFichiersPlusRécents (booléen) : Vrai pour écraser les fichiers différents même s'ils sont plus récents, Faux sinon
+      // Valeur de retour :
+      // 	Aucune
+      //
+      Procédure _DetecteSiCopie(bEcraserFichiersPlusRécents est un booléen)
+      
+      // Variables locales
+      nIndice 		est un entier
+      bFichierACopier est un booléen
+      nNbLignes 		est un entier
+      nPourcentage 	est un entier
+      sFichierEnCours est une chaine
+      dhDateHeureFichierEnCours 		est un dateHeure
+      dhDateHeureFichierDestination 	est un dateheure
+      
+      // Initialisation des variables
+      nNbLignes = gtabFichiersSource..Occurrence
+      nIndice = 1
+      
+      // Parcours des fichiers source
+      Pour tout element dhDateHeureFichierEnCours,sFichierEnCours de gtabFichiersSource
+      	// affichage du pourcentage
+      	nPourcentage = 100*nIndice/nNbLignes
+      	Message("Comparaison des fichiers : [%nPourcentage%]%")
+      	
+      	// On recherche ce fichier dans la liste des fichiers destination
+      	SI gtabFichiersDestination[sFichierEnCours]..Existe = vrai alors
+      		
+      		// Par défaut, le fichier n'est pas à copier
+      		bFichierACopier = Faux		
+      		dhDateHeureFichierDestination = gtabFichiersDestination[sFichierEnCours]
+      		
+      		// si le fichier source est plus récent
+      		SI dhDateHeureFichierEnCours>dhDateHeureFichierDestination ALORS
+      			bFichierACopier = Vrai
+      		SINON
+      			// si le fichier de destination est plus récent	
+      			
+      			// si l'utilisateur souhaite écraser les fichiers de destination plus récents
+      			SI bEcraserFichiersPlusRécents ALORS
+      				bFichierACopier = Vrai
+      			SINON
+      				bFichierACopier = Faux
+      			FIN
+      		FIN
+      		
+      	SINON
+      		// le fichier de destination n'est pas présent	
+      		bFichierACopier = Vrai
+      	FIN
+      	
+      	// si ce fichier doit être copié
+      	SI bFichierACopier ALORS
+      		TableauAjouteLigne(gtabFichierDestinationACopier,sFichierEnCours)
+      	FIN
+      	nIndice++
+      FIN
+     type : 458752
+   -
+     name : _DetecteSiSuppression
+     procedure_id : 1741135104208493204
+     type_code : 15
+     code : |1+
+      // Résumé : Détecte les fichiers à supprimer dans le répertoire source
+      // Paramètres :
+      //	Aucun
+      // Valeur de retour :
+      // 	Aucune
+      //
+      Procédure _DetecteSiSuppression()
+      
+      // Variables locales
+      sFichierEnCours	 			est une chaine
+      dhDateHeureFichierEnCours	est un dateheure
+      nPourcentage 				est un entier
+      
+      // les fichiers qui restent sont ceux à supprimer
+      nNbFichiers est un entier = gtabFichiersDestination..Occurrence
+      
+      // on liste les fichiers à supprimer
+      nIndice est un entier = 1
+      
+      // Parcours des fichiers destinations
+      POUR TOUT ELEMENT dhDateHeureFichierEnCours,sFichierEnCours DE gtabFichiersDestination
+      
+      	// affichage du pourcentage
+      	nPourcentage = 100*nIndice/nNbFichiers
+      	Message(<§@1829b9a40047001c0010§>)
+      	
+      	// On recherche ce fichier dans la liste des fichiers source
+      	SI gtabFichiersSource[sFichierEnCours]..Existe = faux ALORS
+      		// Ce fichier est à supprimer
+      		tableauAjouteLigne(gtabFichierDestinationASupprimer,sFichierEnCours)		
+      	FIN
+      	nIndice++
+      FIN
+     type : 458752
+   -
+     name : _bVérifieRépertoires
+     procedure_id : 1741441081975267604
+     type_code : 15
+     code : |1-
+      // Résumé : vérification des répertoires
+      // Paramètres :
+      //	sNomRépertoireSource (chaîne ANSI) : Chemin du répertoire source
+      //	sNomRépertoireDestination (chaîne ANSI) : Chemin du répertoire destination
+      // Valeur de retour :
+      // 	booléen : Renvoie vrai si les répertoires sont OK, Faux sinon
+      //
+      Procédure PRIVE _bVérifieRépertoires(sNomRépertoireSource est une chaine, sNomRépertoireDestination est une chaine)
+      
+      // Variables locales
+      sNomDisque est une chaine
+      
+      Message(<§@1829b9a40047001c0005§>)
+      
+      // Vérification du disque source
+      sNomDisque = fExtraitChemin(sNomRépertoireSource,fDisque)
+      SI fDisquePrêt(sNomDisque)=faux ALORS
+      	ErreurDéclenche(1,<§@1829b9a40047001c0006§>)
+      	renvoyer faux
+      FIN
+      
+      // Vérification du disque destination
+      sNomDisque = fExtraitChemin(sNomRépertoireDestination,fDisque)
+      SI fDisquePrêt(sNomDisque)=faux ALORS
+      	ErreurDéclenche(2,<§@1829b9a40047001c0006§>)
+      	RENVOYER Faux
+      FIN
+      
+      // Test du répertoire source
+      SI fRepertoireexiste(sNomRépertoireSource)=faux ALORS
+      	ErreurDéclenche(3,ChaîneConstruit(<§@1829b9a40047001c0007§>, sNomRépertoireSource))
+      	RENVOYER Faux
+      FIN
+      
+      // Création si inexistant du répertoire destination
+      si fRépertoireExiste(sNomRépertoireDestination)=faux
+      	SI OuiNon(ChaîneConstruit(<§@1829b9a40047001c0007§>,sNomRépertoireDestination), <§@1829b9a40047001c0008§>) ALORS
+      		SI fRepCrée(sNomRépertoireDestination)=faux ALORS			
+      			ErreurDéclenche(4,"Impossible de créer le répertoire [%sNomRépertoireDestination%]")
+      			RENVOYER Faux
+      		FIN
+      	SINON
+      		ErreurDéclenche(4,"Impossible de créer le répertoire [%sNomRépertoireDestination%]")
+      		RENVOYER Faux
+      	FIN
+      FIN
+      
+      RENVOYER vrai
+     type : 458752
+   -
+     name : AppliqueSynchronisationFichier
+     procedure_id : 1741461444416288924
+     type_code : 15
+     code : |1-
+      // Résumé : Applique la synchronisation sur un fichier
+      // Paramètres :
+      //	sNomFichier (chaîne ANSI) : Nom relatif du fichier à synchroniser
+      // Valeur de retour :
+      // 	booléen : Vrai si la synchronisation s'est correctement déroulée, Faux sinon
+      //
+      PROCEDURE AppliqueSynchronisationFichier(sNomFichier est une chaine)
+      
+      // Variables locales
+      nIndice est un entier
+      sFichierSource est une chaine
+      sFichierDestination est une chaine
+      sRepertoireDestination	est une chaine
+      
+      // On construit les chemins complets 
+      sFichierSource = gsNomRepertoireSource+["\"]+sNomFichier
+      sFichierDestination = gsNomRepertoireDestination+["\"]+sNomFichier
+      
+      // On regarde si c'est une copie
+      nIndice = TableauCherche(gtabFichierDestinationACopier,tcDichotomique,sNomFichier)
+      Si nIndice>0 alors
+      	// C'est une copie	
+      	
+      	// Création du répertoire destination si nécessaire
+      	sRepertoireDestination = fExtraitChemin(sFichierDestination,fDisque+fRépertoire)
+      	SI fRépertoireExiste(sRepertoireDestination) = faux alors
+      		fRepCrée(sRepertoireDestination)
+      	Fin
+      	
+      	// copie du fichier
+      	SI fCopieFichier (sFichierSource,sFichierDestination) ALORS 
+      		RENVOYER Vrai
+      	FIN
+      	
+      	// par défaut, la copie échoue
+      	RENVOYER Faux	
+      FIN
+      
+      // On regarde si c'est une suppression
+      nIndice = TableauCherche(gtabFichierDestinationASupprimer,tcDichotomique,sNomFichier)
+      SI nIndice>0 ALORS
+      	// C'est une suppression
+      	SI fSupprime(sFichierDestination) ALORS 
+      		RENVOYER Vrai
+      	FIN
+      	
+      	// par défaut, la suppression échoue
+      	RENVOYER Faux
+      	
+      FIN
+      
+      // Par défaut, aucune opération n'est appliquée
+      RENVOYER Faux
+     type : 458752
+   -
+     name : DefinirException
+     procedure_id : 1741535210484451019
+     type_code : 15
+     code : |1-
+      // Résumé : Définit les exceptions
+      // Paramètres :
+      //	tabListeRepertoireException (tableau) : Tableau des répertoires exceptions
+      //	tabListeExtensionsException (tableau) : Tableau des extensions exceptions
+      // Valeur de retour :
+      // 	Aucune
+      //
+      PROCEDURE DefinirException(tabListeRepertoireException est un tableau de chaine, tabListeExtensionsException est un tableau de chaine)
+      
+      // Mémorisation des exceptions
+      gtabRepertoiresException = tabListeRepertoireException
+      gtabExtensionsException = tabListeExtensionsException
+      
+      // On trie les tableaux pour permettre des recherches dichotomiques
+      TableauTrie(gtabRepertoiresException,ttCroissant)
+      TableauTrie(gtabExtensionsException,ttCroissant)
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : COL_SansNom1
+resources :
+ string_res :
+  identifier : 0x1829b9a40047001c
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+  strings :
+   -
+     text :
+      fr-FR : Vérification des répertoires.
+     index : 5
+   -
+     text :
+      fr-FR : "Le lecteur [%sNomDisque%] n'est pas connecté !"
+     index : 6
+   -
+     text :
+      fr-FR : Le répertoire %1 n'existe pas.
+     index : 7
+   -
+     text :
+      fr-FR : Voulez-vous le créer ?
+     index : 8
+   -
+     text :
+      fr-FR : "Comparaison des fichiers : [%nPourcentage%]%"
+     index : 16
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

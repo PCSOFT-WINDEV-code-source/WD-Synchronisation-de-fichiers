@@ -1,0 +1,131 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : FEN_TRAITEMENT_AUTOMATIQUE
+ major_version : 28
+ minor_version : 0
+ type : 2
+ description : WD Synchronisation de fichiers
+ subtype : 0
+window :
+ name : FEN_TRAITEMENT_AUTOMATIQUE
+ identifier : 0x2829f91f0532f8f2
+ internal_properties : CAAAAAgAAADnnh26UxH8b7CzIIktz5XiP9w5u26Pji/C1irJU/WbjeSPN78j3HhIRi06E5JOuTxVPG+y+Xteqr8QvSFBLtgq59WRntzxmF7DtcaS28EUFKaxkePTvoogBSqOLfBkvItt6r2s/s+5bIVvYprQ4dfLZuNXhr/Flmgx7aTtPibMLg+SPBuMSPsTrS1PTiihlYLbWt7lsU4Wcnev40PYfbcKMs0FqpRxlQJ8CRi2sNrX4LdNJPRX4KTtYFiFYdmH3bLsr/n01w5wJrnYYV77WQthJjnpqtcex3ircy6OeX2qvniQL4FvVBkZdBpKe6zaSvCopmuBFsNsI7d32vvs/9ROZZB9ICQXtn2rz6psETYTkLih88MBd72W+2Dnc3tPMl3c4qoeshbzVYfrwym0x38DJGFUfKLfHowaabvt/v+Rx17K0xA63wE2tOd57l0BcT96VizOylGolkYMZoCc+ypalAlSrCCgBARsuJoE6ZYGevGukDq3HWSKPk87t2xdh28hjM0eKNADN/koyMqDqMbUlUlVTUX4O8+gbyWrqxBW2JFIvxP3bJt1KxYZqgYQYfPniQCIk4m26XXyLGw2A8eYjYTeDks7onOYwi7EwR0g8+A3Jxn5Xn9WtuT8nOqG0oy3M8pDV2ah9lMMeCM+5n4Q8EFoVaW+EL6L1U9ZxyDFYVkwiYL3HHBnx+3bvCP23VruAczQ4p+AEgDmMMTJBofX2qmiwhAjZr7220G/trd6EIuPponXgv12scCGd6VYd+JxrT6s+PlNV56IXkJX12BY/DvBkadhcAUmbSv/clE=
+ properties :
+  width : 457
+  height : 117
+  widthClient : 455
+  heightClient : 85
+  widthMin : -4
+  heightMin : 0
+ controls :
+  -
+    name : Mise_à_jour_auto
+    identifier : 0x2829f91f0533f8f2
+    internal_properties : CAAAAAgAAAA9h2pRah8KGU24TkCrrlaJudfoYsxttXuHADtuDFpPGLmUvg0igwBXhlK0HUvP5X3Mqg0CC8LSLa4vsp/UJL8mBwETMha70NWMJA9iPXNY+A7eCRx70XjRfnpE/pSFQFwsZjpKGgxhvu9DJfKKBx0n+s6olne/Mzw2PzeT27jl7LxgIKEdJOAPX1hA2mHmT9yCzNh32j8FJC+xfiah1MwdtE8TPwn2nS3co3+12koJOzu8WEdLD8HX3SicBl7ZQJ9Hvr09BIJN3NsUW8XVsPDM9r9IUuEOjyb4Yj9XmqE8oHE7WDukSF3LyFNB8AZXPcCREXK3N0rVQ7BUvzqgYY3G2JSaFQRWotnTRTHVhD2d0m6y4KKQfvFseNuMJpGe9Fiq0W9jrFU7FWtHOkAsV9qjncWqQEUgJybUSZbmnVTLRrbZPJeF4DwF+Kx93kBMBZztjGW4aVWz+Yo00+9QFR7ivhorO/QBW/JsiZgxEHKTjoBhqfsbi1pVEexaVw2IvVOAWCGGRp8XT8zg0cf/6CWMDKBVWhxzBtuttcQihg==
+    properties :
+     x : 38
+     y : 9
+     width : 315
+     height : 20
+    type : 3
+    code_elements :
+     type_code : 2
+     p_codes :
+      -
+        code : |1-
+         
+        type : 14
+  -
+    name : Lib_Rep_Source
+    identifier : 0x2829f91f0534f8f2
+    internal_properties : CAAAAAgAAAAFLx5rMPvWXcu6NlS5gP/lHG3nbqj+3h9YPoBt9CF4ibrsdUwn9hov+ATU1+90m0zBzA9Jg1Y/t4N8OjOZhzPuGIjnNB6atCMHvL9hBgYKusGkvTY4RR/BnGjzO4oGSc+15ze5xM3OJOHoaXMGMu3onVHtrsj8nYeJAiixwc8MN9e35HynRLESsjoOAzGwaI/o/0HkWx5RP3CCKVL3ldKhNSze63E9A9Icgfc6a1yIS3stt+xjnGUkXqXkQEsISJj73LsI0eliK9v+w5iElbp+ppTHLx0R+M5yZ4e5CvvTxheZU+7TuoCEZ6BxCwHSxiFFhCBb5Xna3wJNEVhGOExyxywY8YqQj8SoGsy7Z+jgOT+REcmTInIIoDg4G1LfzJaJ7WzUeQ2gt4SdffhdpcZH4zLXelrPZZ9wwWlK8ZmWWsIYwQMMgfOxTsTja/odbiFov7ifwpyui6Smv1CHHjgQyMgEEINtslY891W8E0hFgk4E84N3wK4Svbo+ZVn6WqgK6Pr/70xzSENp0a0kbFTV7Srm
+    properties :
+     x : 38
+     y : 47
+     width : 315
+     height : 14
+    type : 3
+    code_elements :
+     type_code : 2
+     p_codes :
+      -
+        code : |1-
+         
+        type : 14
+  -
+    name : Lib_Rep_Dest
+    identifier : 0x2829f91f0535f8f2
+    internal_properties : CAAAAAgAAADv2u4WW/xDULehgT+r9Uilg6R+7E4cYauCTSWccltHzXAuQjM6tK8cJMCV0S5E577GcAqr8h4SgphgAmiWTv1pZJ8k07nJKmfRzah3j6i1ntpUetsEiM36KfTjWgCK+H3rOQdZQMuAMuv7TOJ5Yf5R9111eHdzqLIRdackHQzWQjYeMnnOc+SfDA6xtbKTfdQY99l6bgaSyyZqToI6oTRwjFmkob/i5ydXLOZp/7LR2w0V/PA/EnlV6LE1zUHHvV2PTFyFWvhNfQ5wp8W8QQJbv8bVElTl4HTKKWhu9zDRNZNtF3eOF10rEF1JnRn84C6rKE4KUKgsMvUu8UC2eEJGufGdfSAMjzC44gx7w+rqvG5DBYE/DgoS4KNvIDvYOdZvHjuD7HsUPsk1jepz+0z0NGhBjpLxd+Rw5ReszjAX3euRuiUsTzww6rEB0tDFpINEzGuMA0GjbDsYpbjhdhssyPvnYFQ9VJPX3IcggfHl/DS8RtuDnDwjd/bpzHu+ElLf5Hzcw4REdNue+NV1SH6kgk/MIRwo97A14Gw=
+    properties :
+     x : 38
+     y : 65
+     width : 315
+     height : 14
+    type : 3
+    code_elements :
+     type_code : 2
+     p_codes :
+      -
+        code : |1-
+         
+        type : 14
+ menu :
+  name : Menu
+  identifier : 0x3abf6a2f2d57e0e7
+  internal_properties : CAAAAAgAAADAfZ27Q+jJ/MBXHLGCb7PyE2Yqjvuo9mAX2ZN+LLuyQtzms1431znXR0sNCCeLESXZp1gqmo+m2mUhb2ELR2phZ8VOgUSyXddfQyxpxffipvH/iiFuFkCLgpjx1Ah9/9/ndeRpWb0s9Qcjy8oPtW3aMcRtuglgDe5Ch9/jnC/Drp19/hhf+qz96diLw5T0yWlzg33c/E8hhMwUBdSOV69/8iDQGLfTvLoTvV3YkiQ5Dce7dxB2gUx1AVvVTykQMm7G+0haIOV568KMGgPEJluRN2XjgQ11Tb8vVxt6P2g=
+  options : []
+ languages :
+  - fr-FR
+ popup_menus : []
+ message_bar :
+  internal_properties : CAAAAAgAAADLvlG/wQFXuOaQSNESI7h1DpUEWRYdc/9njhlrRL2ey/FNdfA4Kl5YN6ccLAqPZ48fdIwISuDEEPacNClHFnWMlzzglFcbDwxj07+5qwUfpL1uCRlNgyQLD02WLwp9KDs=
+ actionbar : {}
+ code_elements :
+  internal_properties : CAAAAAgAAACvhiIr8gSQ5loUp83uTso9CuLc4dExenO6nYq0wt6wNhhy8DIKk+8xrI7GMink5ce8SLehbaZBjJVyvy60Arg=
+  type_code : 1
+  p_codes :
+   -
+     code : |1-
+      
+   -
+     internal_properties : CAAAAAgAAAC+uXpEj1oF+PNuE84i98yvmwBRjUQ1lJ4ZQyezFT+GDwe4vNltDddvfkpbmQXiryTXoH/Ps5VtbBcoWnXXqDsjIIvCD/Kmiyh9IXqovQhhJfad3CXdJZ3jnzWnBnRXBumKUXPHd7FU3W6Hrw==
+     code : |1-
+      // détection de l'enfoncement de echap
+      Evénement("StopDefilement","*.*",WM_KEYDOWN)
+     type : 34
+   -
+     type : 180
+     enabled : false
+   -
+     type : 230
+     enabled : false
+   -
+     code : |1-
+      
+     type : 2
+   -
+     code : |1-
+      
+     type : 11
+   -
+     code : |1-
+      
+     type : 12
+   -
+     type : 17
+   -
+     code : |1-
+      
+     type : 13
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : FenAuto
+resources :
+ string_res :
+  identifier : 0x101155d3002645c8
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAAC68/W0/adbG0nFCRhrE42B5HRnbDzVHaz86sSQyxlBk7I=
+rad :
+ internal_properties : CAAAAAgAAABoAN7PLpwJW3EiA7WVZdCA5EwrCA1rvutcDHooMWKe

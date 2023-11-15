@@ -1,0 +1,140 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : WD Synchronisation de fichiers
+ major_version : 28
+ minor_version : 0
+ type : 4097
+ description : WD Synchronisation de fichiers
+ subtype : 0
+project :
+ identifier : 0x0
+ internal_properties : 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
+ configurations :
+  -
+    name : WD Synchronisation de fichiers
+    internal_properties : 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
+    configuration_id : 13735405204232593931
+    type : 1
+    generation_name : WD Synchronisation de fichiers.exe
+    version :
+     version : VI200027
+     internal_generation_version : 1
+     autoincrement_version : false
+    icon_filename : .\description.ico
+    language : 1
+ elements :
+  identifier : 0x4acc5213000f194b
+  elements :
+   -
+     name : ProceduresGlobales
+     identifier : 0x3dd8f74950bbb5fa
+     internal_properties : CAAAAAgAAAB60KLmxYKqtbJBmkyF2psn4PHv51p/8OZKhLde1Svp59ERd3euSiQY20W/Ofn3g3Vf5w==
+     physical_name : .\ProceduresGlobales.wdg
+     type : 7
+   -
+     name : FEN_SYNCHRONISATION
+     identifier : 0x3dd8f7477856b5da
+     internal_properties : CAAAAAgAAABk4kxoVwwkx5BjMOZvPjFhuo+JuTKf6r74OvJG63+VC+E9J9dM9Mq+vWdRr3dpEYdx8Q==
+     physical_name : .\FEN_SYNCHRONISATION.wdw
+     type : 2
+   -
+     name : FEN_PROJET
+     identifier : 0x3dd8f7486144b5ea
+     internal_properties : CAAAAAgAAAD/W9fL+KUNHim8xQv85OCQTTqQkF2O1s7Mc6mqsWmtI5Vv26N3gV3ThrAqlh7SriLqag==
+     physical_name : .\FEN_PROJET.wdw
+     type : 2
+   -
+     name : TEST_ProceduresGlobales
+     identifier : 0x427a4e1b00411b65
+     internal_properties : CAAAAAgAAACloY2RLkvj/EsKV7lCm2YSx0YuBq/EqgCu4+itVNw2qhrqWCbxD+9lFA6IcDCgWEiwsA==
+     physical_name : .\TEST_ProceduresGlobales.wxt
+     type : 17
+   -
+     name : COL_Synchronisation
+     identifier : 0x4829b9d7003ac800
+     internal_properties : CAAAAAgAAAD/WUF6CYbhVoA0L2x46OUP+tqkuD6eq4ES2PDjgtrR0ofMvsFvHQafpxW65vCBAul6
+     physical_name : .\COL_Synchronisation.wdg
+     type : 7
+   -
+     name : FI_CONTENU_TABLE
+     identifier : 0x4829f6040051d8a3
+     internal_properties : CAAAAAgAAAD5VSFlQj93eNtkfS/yLlAVbVxkrB0CAN5WDYrL2lbEXKQM+e9jpd9rpJoE/IR8BPTcZA==
+     physical_name : .\FI_CONTENU_TABLE.wdw
+     type : 8
+   -
+     name : FEN_TRAITEMENT_AUTOMATIQUE
+     identifier : 0x3dd8f7446582b57d
+     internal_properties : CAAAAAgAAAAIBnAsm8Boc3wPXIJ7mW0VwrUhAab7zpROC4jVStY+sgbkXCLwCOZaGQP9+7s1zcMNFQ==
+     physical_name : .\FEN_TRAITEMENT_AUTOMATIQUE.wdw
+     type : 2
+  other_elements :
+   -
+     physical_name : .\Description.rtf
+   -
+     physical_name : .\Description.gif
+  analysis : .\WD Synchronisation de fichiers.ana\WD Synchronisation de fichiers.wda
+  net_assemblies : []
+  uwp_api : []
+  external_components : []
+  internal_components : []
+ report_and_queries_enabled : false
+ common_generation_directory : true
+ languages :
+  - fr-FR
+ code_elements :
+  internal_properties : CAAAAAgAAADjSEY1uujSIBt0k1xxvvo2fD+8aeMwYTbz/fryRd8fvMh4SHHyrxEpCMoDioHrLIDaTHI4qOvzljWpg+bcwX6E8UsgAVFS+mvAJR+CbcRlOjP1CLpasORuogwlX63g9kZASS/8ZO6Kh28u+bJpQ0IMf2G1HY7TLA+YJfiL6agc+M2v221F53W4OEvVp+LTi4A4P3U47z+kB0u5/PxJ0hFhYB9ZmHZ2A23TE6Iz4tD3I4F7ZPJGhF/SsE4j7/VIcmU6jzocDJCvlVGNDmA3eFzkgRzbj1R/
+  type_code : 0
+  p_codes :
+   -
+     internal_properties : CAAAAAgAAACSXXbWt1YdCDfWy+4uA8ybb8AVqRjhFBZN8z/rgfOOywPIUE1hgUdHwoKTsfF+fzhzAOsz14M/Nj0KuNPF3g2BmoXYBTDkzWKry1hOm17L4/CPMgs7qzd9ZXd1dOrNiH8MU2EV7QfS6YJrgw==
+     code : |1+
+      extern "winconst.wl"
+      
+      GLOBAL
+      	gbAuto est un booléen 				// à vrai si mode sans interface
+      	gbSuppression est un booléen = Vrai	// à vrai si on veut une copie à l'identique
+      	gbEcrase est un booléen = Vrai		// à vrai si on écrase les fichiers de destination plus récents
+      	gbSousRep est un booléen = Vrai		// on descend dans les sous-répertoires
+      	gsLigneCommande est une chaine 		// ligne de commande
+      LOCAL
+      
+      // passage par ligne de commande
+      // -> nom du projet
+      // -> * pour tous les projets
+      gsLigneCommande = LigneCommande()
+      // on enlève le /
+      gsLigneCommande = gsLigneCommande[[2 A]]
+     type : 196608
+   -
+     code : |1-
+      
+     type : 196610
+   -
+     code : |1-
+      
+     type : 196619
+   -
+     type : 196621
+   -
+     type : 196627
+     enabled : false
+  orphans :
+   -
+     name : WD Synchronisation de fichiers
+     identifier : 0x4acc5213001419e7
+     code_elements :
+      type_code : 159
+      p_codes : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+rad :
+ internal_properties : CAAAAAgAAABhIL0UXeZmxDJxY3Xy0Q==
+project_explorer :
+ explorer_type : project
+resources :
+ string_res :
+  identifier : 0x0
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAAAd98VSJfHHqE3P0QHwrwdhn7ig8dWBR6valpUTgnAMTVXiDg==
